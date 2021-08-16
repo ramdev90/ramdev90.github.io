@@ -46,4 +46,4 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
   providers: [ShoppingListService, RecipeService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
