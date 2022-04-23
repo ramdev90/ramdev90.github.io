@@ -10,6 +10,7 @@ import { RecipeListComponent } from "./recipe-list/recipe-list.component";
 import { RecipeStartComponent } from "./recipe-start/recipe-start.component";
 import { RecipesRoutingModule } from "./recipes-routing.module";
 import { RecipesComponent } from "./recipes.component";
+import { SubListComponent } from './sub-list/sub-list.component';
 
 @NgModule({
     declarations: [
@@ -19,6 +20,7 @@ import { RecipesComponent } from "./recipes.component";
         RecipeItemComponent,
         RecipeStartComponent,
         RecipeEditComponent,
+        SubListComponent,        
     ],
     imports: [
         // CommonModule,
