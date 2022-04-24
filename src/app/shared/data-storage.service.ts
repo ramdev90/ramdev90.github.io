@@ -30,10 +30,11 @@ export class DataStorageService {
     return this.authService.user.pipe(
       take(1),
       exhaustMap(user => {
+        const tkn = user.token !== null ? user.token : '';
         return this.http.get<Recipe[]>(
           'https://ng-course-recipe-book-c1c29.firebaseio.com/recipes.json',
           {
-            params: new HttpParams().set('auth', user.token)
+            params: new HttpParams().set('auth', tkn)
           }
         );
       }),
