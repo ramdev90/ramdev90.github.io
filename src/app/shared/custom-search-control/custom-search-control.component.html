@@ -1,0 +1,14 @@
+<input 
+style="position: relative;"
+type="text"
+class="form-control"
+[(ngModel)]="value"
+[placeholder]="placeholder"
+#search
+(input)="checkEventType($event, search.value)"
+(keyup.enter)="checkEventType($event, search.value)"
+[class.is-invalid]="touchedState && invalidState"
+(blur)="onToched()"
+>
+<!-- [disabled]="disabled" -->
+<!-- [class.is-invalid]="touchedState && invalidState" -->

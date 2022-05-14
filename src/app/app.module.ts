@@ -23,17 +23,21 @@ import { CoreModule } from './core.module';
 import { AuthModule } from './auth/auth.module';
 // import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer';
 import { RecipesModule } from './recipes/recipes.module';
+import { CustomSearchControlComponent } from './shared/custom-search-control/custom-search-control.component';
+import { DragulaModule } from 'ng2-dragula';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    CustomSearchControlComponent
 
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    DragulaModule.forRoot(),
     // StoreModule.forRoot({ shoppingList: shoppingListReducer }),
     RecipesModule,
     ShoppingListModule,
