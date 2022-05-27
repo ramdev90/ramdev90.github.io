@@ -7,6 +7,7 @@ import { PlaceholderDirective } from "./placeholder/placeholder.directive";
 import { DropdownDirective } from "./dropdown.directive";
 import { CustomDatepickerComponent } from './custom-datepicker/custom-datepicker.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { CustomSearchControlComponent } from './custom-search-control/custom-search-control.component';
 
 @NgModule({
     declarations: [
@@ -14,7 +15,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
         PlaceholderDirective,
         LoadingSpinnerComponent,
         DropdownDirective,
-        CustomDatepickerComponent
+        CustomDatepickerComponent,
+        CustomSearchControlComponent
 
     ],
     imports: [
@@ -26,6 +28,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
         LoadingSpinnerComponent,
         DropdownDirective,
         CommonModule,
+        CustomSearchControlComponent,
         //temp
         FormsModule, 
         ReactiveFormsModule

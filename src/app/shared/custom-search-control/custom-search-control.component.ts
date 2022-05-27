@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-custom-search-control',
@@ -7,20 +7,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CustomSearchControlComponent implements OnInit {
 
-  //temp
-  touchedState: true;
-  invalidState: true;
-  //
-
-  @Input() placeholder = 'Search';
-  value: ''
-
   constructor() { }
 
   ngOnInit(): void {
   }
-
-  checkEventType(a: any, b: any) { }
-  onToched() { }
 
 }
