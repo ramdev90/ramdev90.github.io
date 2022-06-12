@@ -28,7 +28,7 @@ export class AuthComponent implements OnDestroy {
     private authService: AuthService,
     private router: Router,
     private componentFactoryResolver: ComponentFactoryResolver
-  ) { }
+  ) {}
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
