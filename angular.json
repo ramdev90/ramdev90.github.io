@@ -103,5 +103,7 @@
       }
     }
   },
-  "defaultProject": "RecipeBook"
+  "cli": {
+    "analytics": false
+  }
 }
