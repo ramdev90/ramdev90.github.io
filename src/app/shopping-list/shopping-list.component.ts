@@ -6,11 +6,15 @@ import { Ingredient } from '../shared/ingredient.model';
 import { LoggingService } from '../logging.service';
 import * as ShoppingListActions from './store/shopping-list.actions';
 import * as fromApp from '../store/app.reducer';
+import { NgFor, AsyncPipe } from '@angular/common';
+import { ShoppingEditComponent } from './shopping-edit/shopping-edit.component';
 
 @Component({
-  selector: 'app-shopping-list',
-  templateUrl: './shopping-list.component.html',
-  styleUrls: ['./shopping-list.component.css']
+    selector: 'app-shopping-list',
+    templateUrl: './shopping-list.component.html',
+    styleUrls: ['./shopping-list.component.css'],
+    standalone: true,
+    imports: [ShoppingEditComponent, NgFor, AsyncPipe]
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
   ingredients: Observable<{ ingredients: Ingredient[] }>;

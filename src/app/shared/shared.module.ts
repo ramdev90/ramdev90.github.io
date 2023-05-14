@@ -8,13 +8,10 @@ import { DropdownDirective } from './dropdown.directive';
 import { LoggingService } from '../logging.service';
 
 @NgModule({
-    declarations: [
-        AlertComponent,
+    imports: [CommonModule, AlertComponent,
         LoadingSpinnerComponent,
         PlaceholderDirective,
-        DropdownDirective
-    ],
-    imports: [CommonModule],
+        DropdownDirective],
     exports: [
         AlertComponent,
         LoadingSpinnerComponent,

@@ -6,10 +6,15 @@ import { Store } from '@ngrx/store';
 import { DataStorageService } from '../shared/data-storage.service';
 import { AuthService } from '../auth/auth.service';
 import * as fromApp from '../store/app.reducer';
+import { DropdownDirective } from '../shared/dropdown.directive';
+import { NgIf } from '@angular/common';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html'
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    standalone: true,
+    imports: [RouterLink, NgIf, RouterLinkActive, DropdownDirective]
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated = false;

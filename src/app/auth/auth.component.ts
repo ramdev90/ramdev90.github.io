@@ -4,17 +4,21 @@ import {
   ViewChild,
   OnDestroy
 } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 
 import { AuthService, AuthResponseData } from './auth.service';
 import { AlertComponent } from '../shared/alert/alert.component';
 import { PlaceholderDirective } from '../shared/placeholder/placeholder.directive';
+import { LoadingSpinnerComponent } from '../shared/loading-spinner/loading-spinner.component';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html'
+    selector: 'app-auth',
+    templateUrl: './auth.component.html',
+    standalone: true,
+    imports: [PlaceholderDirective, NgIf, LoadingSpinnerComponent, ReactiveFormsModule, FormsModule]
 })
 export class AuthComponent implements OnDestroy {
   isLoginMode = true;

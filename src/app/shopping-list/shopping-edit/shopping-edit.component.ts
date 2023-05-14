@@ -1,16 +1,19 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { Ingredient } from '../../shared/ingredient.model';
 import * as ShoppingListActions from '../store/shopping-list.actions';
 import * as fromApp from '../../store/app.reducer';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-shopping-edit',
-  templateUrl: './shopping-edit.component.html',
-  styleUrls: ['./shopping-edit.component.css']
+    selector: 'app-shopping-edit',
+    templateUrl: './shopping-edit.component.html',
+    styleUrls: ['./shopping-edit.component.css'],
+    standalone: true,
+    imports: [ReactiveFormsModule, FormsModule, NgIf]
 })
 export class ShoppingEditComponent implements OnInit, OnDestroy {
   @ViewChild('f', { static: false }) slForm: NgForm;
