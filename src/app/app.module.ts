@@ -9,7 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
 import * as fromApp from './store/app.reducer';
-import { DragulaModule } from 'ng2-dragula';
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
   imports: [
@@ -17,7 +16,6 @@ import { DragulaModule } from 'ng2-dragula';
     HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot(fromApp.appReducer),
-    DragulaModule.forRoot(),
     SharedModule,
     CoreModule
   ],
