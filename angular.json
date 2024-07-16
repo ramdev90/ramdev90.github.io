@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "RecipeBook:build:production"
+              "buildTarget": "RecipeBook:build:production"
             },
             "development": {
-              "browserTarget": "RecipeBook:build:development"
+              "buildTarget": "RecipeBook:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "RecipeBook:build"
+            "buildTarget": "RecipeBook:build"
           }
         },
         "test": {
