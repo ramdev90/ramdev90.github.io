@@ -24,8 +24,4 @@ export class AppComponent implements OnInit {
     this.authService.autoLogin();
     this.loggingService.printLog('Hello from AppComponent ngOnInit');
   }
-
-  sendTestNotification() {
-    this.recipeService.simulatePushNotification();
-  }
 }

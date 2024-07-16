@@ -54,6 +54,7 @@ export class RecipeService {
   addRecipe(recipe: Recipe) {
     this.recipes.push(recipe);
     this.recipesChanged.next(this.recipes.slice());
+    this.simulatePushNotification('New Recipe Added');
   }
 
   updateRecipe(index: number, newRecipe: Recipe) {
@@ -83,15 +84,25 @@ export class RecipeService {
     console.log('Subscription object:', subscription);    
   }
 
-  simulatePushNotification() {
-    if ('serviceWorker' in navigator && 'PushManager' in window) {
-      navigator.serviceWorker.ready.then(registration => {
-        registration.showNotification('Test Notification', {
-          body: 'This is a test notification.',
-          icon: 'assets/icons/icon-72x72.png',
-          badge: 'assets/icons/badge-72x72.png'
-        });
-      });
-    }
+   // Request notification permission from the user
+   requestNotificationPermission(): Promise<NotificationPermission> {
+    return Notification.requestPermission();
+  }
+
+  simulatePushNotification(msg: string) {
+    this.requestNotificationPermission().then(permission => {
+      if (permission === 'granted') {
+        console.log("Notification permission granted.");
+        if ('serviceWorker' in navigator && 'PushManager' in window) {
+          navigator.serviceWorker.ready.then(registration => {
+            registration.showNotification(msg, {
+              body: msg
+            });
+          });
+        }
+      } else {
+        console.log("Notification permission denied.");
+      }
+    });
   }
 }
