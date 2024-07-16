@@ -6,6 +6,7 @@ import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 import * as ShoppingListActions from '../shopping-list/store/shopping-list.actions';
 import * as fromApp from '../store/app.reducer';
+import { SwPush } from '@angular/service-worker';
 
 @Injectable()
 export class RecipeService {
@@ -28,7 +29,8 @@ export class RecipeService {
   private recipes: Recipe[] = [];
 
   constructor(
-    private store: Store<fromApp.AppState>
+    private store: Store<fromApp.AppState>,
+    private swPush: SwPush
   ) {}
 
   setRecipes(recipes: Recipe[]) {
@@ -62,5 +64,34 @@ export class RecipeService {
   deleteRecipe(index: number) {
     this.recipes.splice(index, 1);
     this.recipesChanged.next(this.recipes.slice());
+  }
+
+  readonly VAPID_PUBLIC_KEY = 'YOUR_VAPID_PUBLIC_KEY';
+
+  subscribeToNotifications() {
+    this.swPush
+      .requestSubscription({
+        serverPublicKey: this.VAPID_PUBLIC_KEY,
+      })
+      .then((sub) => this.sendSubscriptionToTheServer(sub))
+      .catch((err) =>
+        console.error('Could not subscribe to notifications', err)
+      );
+  }
+
+  private sendSubscriptionToTheServer(subscription: PushSubscription) {    
+    console.log('Subscription object:', subscription);    
+  }
+
+  simulatePushNotification() {
+    if ('serviceWorker' in navigator && 'PushManager' in window) {
+      navigator.serviceWorker.ready.then(registration => {
+        registration.showNotification('Test Notification', {
+          body: 'This is a test notification.',
+          icon: 'assets/icons/icon-72x72.png',
+          badge: 'assets/icons/badge-72x72.png'
+        });
+      });
+    }
   }
 }
