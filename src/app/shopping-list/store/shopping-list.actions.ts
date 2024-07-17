@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store';
+import { Action, createAction, props } from '@ngrx/store';
 
 import { Ingredient } from '../../shared/ingredient.model';
 
@@ -9,17 +9,27 @@ export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
 export const START_EDIT = 'START_EDIT';
 export const STOP_EDIT = 'STOP_EDIT';
 
-export class AddIngredient implements Action {
-  readonly type = ADD_INGREDIENT;
+export const AddIngredient = createAction(
+  ADD_INGREDIENT,
+  props<{ ingredient: Ingredient }>()
+);
 
-  constructor(public payload: Ingredient) { }
-}
+export const AddIngredients = createAction(
+  ADD_INGREDIENTS,
+  props<{ ingredients: Ingredient[] }>()
+)
 
-export class AddIngredients implements Action {
-  readonly type = ADD_INGREDIENTS;
+// export class AddIngredient implements Action {
+//   readonly type = ADD_INGREDIENT;
 
-  constructor(public payload: Ingredient[]) { }
-}
+//   constructor(public payload: Ingredient) { }
+// }
+
+// export class AddIngredients implements Action {
+//   readonly type = ADD_INGREDIENTS;
+
+//   constructor(public payload: Ingredient[]) { }
+// }
 
 export class UpdateIngredient implements Action {
   readonly type = UPDATE_INGREDIENT;
@@ -42,8 +52,8 @@ export class StopEdit implements Action {
 }
 
 export type ShoppingListActions =
-  | AddIngredient
-  | AddIngredients
+  // | AddIngredient
+  // | AddIngredients
   | UpdateIngredient
   | DeleteIngredient
   | StartEdit

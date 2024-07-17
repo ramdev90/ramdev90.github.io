@@ -26,25 +26,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private store: Store<fromApp.AppState>
   ) {}
 
-  dayOfMonth: Map<number, string> = new Map([
-    [1, 'st'],
-    [2, 'nd'],
-    [2, 'nd'],
-  ]);
-
   ngOnInit() {
-    function getNumberWithOrdinal() {
-      var s = ['th', 'st', 'nd', 'rd'];
-      var index = 10;
-
-      // return n + (s[(index - 20) % 10] || s[index] || s[0]);
-
-      let num = index + (s[(index - 20) % 10] || s[index] || 'uminlinete');
-      console.log(num);
-    }
-
-    getNumberWithOrdinal();
-
     this.userSub = this.store
       .select('auth')
       .pipe(map((authState) => authState.user))

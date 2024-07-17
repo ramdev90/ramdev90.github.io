@@ -10,7 +10,7 @@ export interface AppState {
 
 export const rootReducer = {};
 
-export const appReducer: ActionReducerMap<AppState, any> = {
-  shoppingList: fromShoppingList.shoppingListReducer,
+export const appReducer: ActionReducerMap<AppState, any> = { 
+  shoppingList: fromShoppingList.shoppingListReducers,
   auth: fromAuth.authReducer
 };
