@@ -23,8 +23,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
         LoadingSpinnerComponent,
         DropdownDirective,
         CommonModule,
-    ],
-    entryComponents: [AlertComponent]
+    ]
 })
 export class SharedModule {
 
