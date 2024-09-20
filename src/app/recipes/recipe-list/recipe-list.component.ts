@@ -4,15 +4,11 @@ import { Subscription } from 'rxjs';
 
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
-import { RecipeItemComponent } from './recipe-item/recipe-item.component';
-import { NgFor } from '@angular/common';
 
 @Component({
-    selector: 'app-recipe-list',
-    templateUrl: './recipe-list.component.html',
-    styleUrls: ['./recipe-list.component.css'],
-    standalone: true,
-    imports: [NgFor, RecipeItemComponent]
+  selector: 'app-recipe-list',
+  templateUrl: './recipe-list.component.html',
+  styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit, OnDestroy {
   recipes: Recipe[];

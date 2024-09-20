@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Store } from '@ngrx/store';
 
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
-import * as ShoppingListActions from '../shopping-list/store/shopping-list.actions';
-import * as fromApp from '../store/app.reducer';
-import { SwPush } from '@angular/service-worker';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
 @Injectable()
 export class RecipeService {
@@ -28,10 +25,7 @@ export class RecipeService {
   // ];
   private recipes: Recipe[] = [];
 
-  constructor(
-    private store: Store<fromApp.AppState>,
-    private swPush: SwPush
-  ) {}
+  constructor(private slService: ShoppingListService) {}
 
   setRecipes(recipes: Recipe[]) {
     this.recipes = recipes;
@@ -47,16 +41,12 @@ export class RecipeService {
   }
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
-    // this.slService.addIngredients(ingredients);
-    // this.store.dispatch(new ShoppingListActions.AddIngredients(ingredients));
-    this.store.dispatch(ShoppingListActions.AddIngredients({ingredients}));
-
+    this.slService.addIngredients(ingredients);
   }
 
   addRecipe(recipe: Recipe) {
     this.recipes.push(recipe);
     this.recipesChanged.next(this.recipes.slice());
-    this.simulatePushNotification('New Recipe Added');
   }
 
   updateRecipe(index: number, newRecipe: Recipe) {
@@ -67,44 +57,5 @@ export class RecipeService {
   deleteRecipe(index: number) {
     this.recipes.splice(index, 1);
     this.recipesChanged.next(this.recipes.slice());
-  }
-
-  readonly VAPID_PUBLIC_KEY = 'YOUR_VAPID_PUBLIC_KEY';
-
-  subscribeToNotifications() {
-    this.swPush
-      .requestSubscription({
-        serverPublicKey: this.VAPID_PUBLIC_KEY,
-      })
-      .then((sub) => this.sendSubscriptionToTheServer(sub))
-      .catch((err) =>
-        console.error('Could not subscribe to notifications', err)
-      );
-  }
-
-  private sendSubscriptionToTheServer(subscription: PushSubscription) {    
-    console.log('Subscription object:', subscription);    
-  }
-
-   // Request notification permission from the user
-   requestNotificationPermission(): Promise<NotificationPermission> {
-    return Notification.requestPermission();
-  }
-
-  simulatePushNotification(msg: string) {
-    this.requestNotificationPermission().then(permission => {
-      if (permission === 'granted') {
-        console.log("Notification permission granted.");
-        if ('serviceWorker' in navigator && 'PushManager' in window) {
-          navigator.serviceWorker.ready.then(registration => {
-            registration.showNotification(msg, {
-              body: msg
-            });
-          });
-        }
-      } else {
-        console.log("Notification permission denied.");
-      }
-    });
   }
 }
