@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 // import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
@@ -11,26 +11,18 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
 import { AuthModule } from './auth/auth.module';
 import { RecipesModule } from './recipes/recipes.module';
-import { DragulaModule } from 'ng2-dragula';
+// import { DragulaModule } from 'ng2-dragula';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent
-
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    DragulaModule.forRoot(),
-    RecipesModule,
-    ShoppingListModule,
-    AuthModule,
-    SharedModule,
-    CoreModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        HeaderComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        // DragulaModule.forRoot(),
+        RecipesModule,
+        ShoppingListModule,
+        AuthModule,
+        SharedModule,
+        CoreModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
