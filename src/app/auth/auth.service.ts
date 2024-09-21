@@ -73,7 +73,7 @@ export class AuthService {
   }
 
   autoLogin() {
-    const userData: { email: string, id: string, _token: string, _tokenExpirationData: string } = JSON.parse(localStorage.getItem('userData') || '');
+    const userData: { email: string, id: string, _token: string, _tokenExpirationData: string } = JSON.parse(localStorage.getItem('userData') || '{}');
     if (!userData) {
       return;
     }
