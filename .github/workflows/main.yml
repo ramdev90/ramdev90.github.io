@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd front  # Navigate to the front directory
-          npm ci  # Install dependencies
+          npm i  # Install dependencies
 
       # Step 4: Build the Angular project
       - name: Build the frontend project
