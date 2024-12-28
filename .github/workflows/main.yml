@@ -1,47 +1,55 @@
-name: CI / CD for Angular
+name: CI / CD for Angular Frontend
+
 on:
   push:
-    branches: ["master"]
+    branches: [ "master" ]  # Trigger this workflow when changes are pushed to the master branch
+
+permissions:
+  contents: write  # Ensure write access to contents (necessary for pushing to gh-pages)
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Runs on the latest Ubuntu environment
+
     steps:
-      - name: Checkout
+      # Step 1: Checkout the repository
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up node.js
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3.3.0
         with:
-          node-version: "18"
-          cache: "npm"
+          node-version: '18'  # Specify Node.js version
+          cache: 'npm'  # Cache npm dependencies for faster builds
 
+      # Step 3: Install dependencies in the front directory
       - name: Install dependencies
         run: |
-          cd front
-          npm i
+          cd front  # Navigate to the front directory
+          npm ci  # Install dependencies
 
-      # Build front project
-      - name: Build
+      # Step 4: Build the Angular project
+      - name: Build the frontend project
         run: |
-          cd front
-          npm run build --prod
+          cd front  # Navigate to the front directory
+          npm run build --prod  # Build the Angular app in production mode
 
-      # Replace secret in the front
-      - name: Replace secret
+      # Step 5: Replace secrets in the frontend project (optional)
+      - name: Replace secrets
         uses: cschleiden/replace-tokens@v1
         with:
-          tokenPrefix: "{"
-          tokenSuffix: "}"
-          files: "front/src/environments/environment.prod.ts"
+          tokenPrefix: '{'
+          tokenSuffix: '}'
+          files: 'front/src/environments/environment.prod.ts'  # Specify the environment file to update
         env:
-          SECRET_API_KEY: ${{ secrets.API_KEY}}
+          SECRET_API_KEY: ${{ secrets.API_KEY }}  # Example secret
 
-      # Deploy to GitHub Pages
+      # Step 6: Deploy the production build to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v3
         with:
-          target_branch: master
-          build_dir: front/dist/front
+          target_branch: gh-pages  # Specify the target branch (GitHub Pages uses gh-pages)
+          build_dir: front/dist/front  # Path to the build output folder (after npm run build)
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Automatically provided GitHub token
