@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd front
-          npm ci
+          # npm ci
 
       # Build front project
       - name: Build
