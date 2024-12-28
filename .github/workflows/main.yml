@@ -18,22 +18,22 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd frontend
+          cd front
           npm ci
 
-      # Build frontend project
+      # Build front project
       - name: Build
         run: |
-          cd frontend
+          cd front
           npm run build --prod
 
-      # Replace secret in the frontend
+      # Replace secret in the front
       - name: Replace secret
         uses: cschleiden/replace-tokens@v1
         with:
           tokenPrefix: "{"
           tokenSuffix: "}"
-          files: "frontend/src/environments/environment.prod.ts"
+          files: "front/src/environments/environment.prod.ts"
         env:
           SECRET_API_KEY: ${{ secrets.API_KEY}}
 
@@ -42,6 +42,6 @@ jobs:
         uses: crazy-max/ghaction-github-pages@v3
         with:
           target_branch: gh-pages
-          build_dir: frontend/dist/recipe-book
+          build_dir: front/dist/recipe-book
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
