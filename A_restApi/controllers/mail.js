@@ -39,7 +39,7 @@ pulse.define(
         const mailOptions = {
             from: 'iamramdevrathod@gmail.com',
             to,
-            bcc: "ramdevrathod900@gmail.com", // BCC to your email
+            // bcc: "ramdevrathod900@gmail.com", // BCC to your email
             subject,
             html: message,
         };

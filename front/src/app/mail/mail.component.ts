@@ -16,6 +16,7 @@ export class MailComponent {
   selectedMailType = 'static';
   generatedMail: null | { subject: any; email: any } = null;
   safeHtmlContent!: SafeHtml;
+  timePending = ''
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
 
@@ -24,6 +25,11 @@ export class MailComponent {
     const startInterval = () => {
       let randomDelay =
         Math.floor(Math.random() * (180000 - 60000 + 1)) + 60000; //max = 180000 (3 minutes in milliseconds). //min = 60000 (1 minute in milliseconds).
+
+      let minutes = Math.floor(randomDelay / 60000); // Divide by 60000 to get minutes
+      let seconds = Math.floor((randomDelay % 60000) / 1000); // Get the remaining seconds
+
+      this.timePending = minutes.toString() + ': ' + seconds.toString();
 
       this.getMail();
       if (true) {
@@ -61,7 +67,10 @@ export class MailComponent {
           document = res?.name;
         }
 
-        this.generateMail(JSON.stringify(document), res?.['Public email'] || res?.email);
+        this.generateMail(
+          JSON.stringify(document),
+          res?.['Public email'] || res?.email
+        );
       });
   }
 
@@ -77,12 +86,12 @@ export class MailComponent {
 
     // TODO
     if (this.selectedMailType === 'static') {
-      generatedPromt = prompt
+      generatedPromt = prompt;
     }
     this.http
       .post(environment.API_BASEURL + '/api/generateEmail', {
         prompt: generatedPromt,
-        selectedMailType: this.selectedMailType
+        selectedMailType: this.selectedMailType,
       })
       .subscribe((res: any) => {
         console.log(res);
