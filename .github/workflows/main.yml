@@ -39,7 +39,7 @@ jobs:
           SECRET_API_KEY: ${{ secrets.API_KEY }}
 
       - name: Build
-        run: npm run build --configuration production
+        run: ng build
 
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v3
