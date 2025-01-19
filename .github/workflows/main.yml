@@ -1,7 +1,11 @@
-name: CI / CD for Angular
+name: CI/CD for Angular
+
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master" ]  # Run this workflow on push to master
+
+permissions:
+  contents: write  # Ensure write access to deploy to GitHub Pages
 
 jobs:
   build-and-deploy:
@@ -32,10 +36,10 @@ jobs:
           tokenSuffix: '}'
           files: 'src/environments/environment.prod.ts'
         env:
-          SECRET_API_KEY: ${{ secrets.API_KEY}}
+          SECRET_API_KEY: ${{ secrets.API_KEY }}
 
       - name: Build
-        run: npm run build --prod
+        run: npm run build --configuration production
 
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v3
