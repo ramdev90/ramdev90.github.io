@@ -1,0 +1,59 @@
+<table border="1">
+  <thead>
+    <tr>
+      <th>
+        <input
+          type="checkbox"
+          [checked]="areAllSelected()"
+          (change)="toggleAllSelections($event)"
+        />
+      </th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Work Email</th>
+      <th>Country</th>
+      <th>Salary</th>
+      <th>Exp.</th>
+      <th>Industry</th>
+      <th>Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of linkedinData">
+      <td>
+        <input
+          type="checkbox"
+          [checked]="isSelected(item._id)"
+          (change)="toggleSelection(item._id)"
+        />
+      </td>
+      <td>{{ item?.full_name }}</td>
+      <td>
+        <div *ngFor="let e of item?.emails">
+          <!-- {{ e?.type }} -->
+          {{ e?.address }}
+        </div>
+      </td>
+      <td>{{ item?.work_email }}</td>
+      <td>{{ item?.location_country }}</td>
+      <td>{{ item?.inferred_salary }}</td>
+      <td>{{ item?.inferred_years_experience }}</td>
+      <td>{{ item?.industry }}</td>
+      <td>
+        <a
+          [href]="
+            item?.linkedin_url?.startsWith('http')
+              ? item.linkedin_url
+              : 'https://' + item.linkedin_url
+          "
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ item?.linkedin_url }}
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<button (click)="onSave()">Save</button>

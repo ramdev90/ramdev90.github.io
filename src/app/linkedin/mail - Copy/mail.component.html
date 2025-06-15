@@ -1,0 +1,82 @@
+<!-- <div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="mail" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12"></div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              formControlName="name"
+              class="form-control"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="imagePath">Image URL</label>
+            <input
+              type="text"
+              id="imagePath"
+              formControlName="imagePath"
+              class="form-control"
+              #imagePath
+            />
+          </div>
+        </div>
+      </div>
+      </div>
+    </form>
+  </div>
+</div> -->
+
+<!-- (change)="onChange($event)" -->
+
+<select [(ngModel)]="selectedMailType">
+  <option [value]="'static'">Static</option>
+  <option [value]="'dynamic'">Dynamic</option>
+</select>
+
+collectionName: <input type="text" [(ngModel)]="collectionName" />
+
+<button (click)="onSend()">{{ selectedMailType + " " }}Send Mail</button>
+
+<br /><br /><br />
+
+<div *ngIf="selectedMailType === 'static'">
+  <div>
+    Subject:
+    <input style="width: 80%" type="text" [(ngModel)]="staticSubject" />
+  </div>
+  <br />
+  <div>
+    Message:
+    <textarea
+      style="width: 80%"
+      type="text"
+      [(ngModel)]="staticMessage"
+    ></textarea>
+  </div>
+
+  <br /><br /><br />
+  <div>
+    {{ htmlContent }}
+  </div>
+</div>
+
+<div *ngIf="selectedMailType === 'dynamic'">
+  <div>
+    Prompt
+    <textarea style="width: 80%; height: 150px;" [(ngModel)]="generatedPromt" ></textarea>
+  </div>
+  <br />
+</div>
+
+{{ generatedMail?.subject }}
+<div [innerHTML]="safeHtmlContent"></div>
