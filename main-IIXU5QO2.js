@@ -61,36 +61,30 @@ const message =
 	 make email in about 80 to 120 words and dont add my contact info in email body not website not email and not phone
 	 QueenQuarry Team providing web development service`;intervalId;onSend(){let e=()=>{let n=Math.floor(Math.random()*120001)+6e4;this.getMail(),this.intervalId=setTimeout(e,n)};e()}setTemplate(e){this.staticMessage=`<p>Hi ${e},</p>
 
+
 <p>
-  I hope you're doing well. My name is Ramdev Rathod, and I\u2019m a software
-  engineer with solid experience building front-end applications using Angular
-  and a strong backend foundation as a MongoDB Certified Developer.
+  I hope you're doing well. My name is Ramdev Rathod, and I'm a software engineer with hands-on experience in building modern web applications using Angular and backend technologies, with certification in MongoDB development.
 </p>
 
 <p>
-  I\u2019m currently exploring international opportunities where I can contribute to
-  high-impact projects, especially with companies leveraging modern JavaScript
-  stacks.
+  I'm currently exploring opportunities where I can be part of impactful projects, particularly those involving the modern JavaScript ecosystem.
 </p>
 
 <p>
-  Over the past 3+ years, I\u2019ve worked primarily on Angular-based projects in
-  fintech and ERP domains\u2014building responsive, modular UIs, optimizing front-end
-  performance, and collaborating in Agile teams. My MEAN stack experience
-  includes developing REST APIs, integrating MongoDB, and deploying full-stack
-  features end-to-end. and am always eager to bring clean code and performance
-  optimization into fast-paced teams.
+  Over the past 3+ years, I've worked extensively on Angular-based applications in the fintech and ERP sectors\u2014focusing on modular UI development, performance tuning, and agile team collaboration. My full-stack (MEAN) experience includes building RESTful APIs, integrating with MongoDB, and delivering complete end-to-end features. I'm passionate about clean code, scalable solutions, and contributing to dynamic development environments.
 </p>
 
 <p>
-  If you know of any roles that align, or could point me in the right direction,
-  I\u2019d love to connect.
+  If there are any suitable openings you're aware of, or if you could refer me in the right direction, I'd sincerely appreciate the connection.
 </p>
 
-<p>Thanks for your time, and I look forward to connecting.</p>
 <p>
-  Best regards,<br />
-  Ramdev Rathod<br />
+  Thank you for your time, and I'd be glad to connect further.
+</p>
+
+<p>
+  Kind regards,<br />
+  <strong>Ramdev Rathod</strong><br />
   https://www.linkedin.com/in/rathod-ramdev/
 </p>`}getMail(){this.http.get(vt.API_BASEURL+"/api/getLinkedinData/getData?selected=true&limit=1&setSentOne=true").subscribe(e=>{let n=JSON.parse(JSON.stringify(e)),r=null;if(n[0]&&(this.currentDoc=n[0],this.setTemplate(this.currentDoc?.full_name||""),n[0].emails.length)){let i=n[0].emails;r=i[0].address,i.forEach(o=>{o.type=="personal"&&(r=i[0].address)})}r&&this.generateMail(r,n[0]._id)})}generateMail(e,n){this.selectedMailType==="static"?(this.sendMail(n,e,this.staticSubject,this.staticMessage),this.generatedMail={subject:this.staticSubject,email:this.staticMessage},this.safeHtmlContent=this.sanitizer.bypassSecurityTrustHtml(this.staticMessage)):this.http.post(vt.API_BASEURL+"/api/generateEmail",{prompt:this.generatedPromt,selectedMailType:this.selectedMailType,collectionName:this.collectionName}).subscribe(r=>{this.sendMail(r?._id,e,r?.subject,r?.email),this.generatedMail={subject:r?.subject,email:r?.email},this.safeHtmlContent=this.sanitizer.bypassSecurityTrustHtml(r?.email)})}sendMail(e,n,r,i){console.log("running email",n),this.curEmail=n,this.http.post(vt.API_BASEURL+"/api/mail/send-email",{_id:e,to:n,subject:r,message:i,collectionName:this.collectionName}).subscribe(o=>{this.currCount++,console.log(o)})}static \u0275fac=function(n){return new(n||t)(O(cr),O(Yi))};static \u0275cmp=Ee({type:t,selectors:[["app-mail"]],standalone:!0,features:[Me],decls:17,vars:11,consts:[[3,"ngModelChange","ngModel"],[3,"value"],["type","text",3,"ngModelChange","ngModel"],[3,"click"],[4,"ngIf"],[3,"innerHTML"],["type","text",2,"width","80%",3,"ngModelChange","ngModel"],[2,"width","80%","height","150px",3,"ngModelChange","ngModel"]],template:function(n,r){n&1&&(_(0,"select",0),rn("ngModelChange",function(o){return xn(r.selectedMailType,o)||(r.selectedMailType=o),o}),_(1,"option",1),b(2,"Static"),w(),_(3,"option",1),b(4,"Dynamic"),w()(),b(5," collectionName: "),_(6,"input",2),rn("ngModelChange",function(o){return xn(r.collectionName,o)||(r.collectionName=o),o}),w(),_(7,"button",3),oe("click",function(){return r.onSend()}),b(8),w(),_e(9,"br")(10,"br")(11,"br"),b(12),Se(13,YA,13,3,"div",4)(14,JA,5,1,"div",4),b(15),_e(16,"div",5)),n&2&&(nn("ngModel",r.selectedMailType),E(),$("value","static"),E(2),$("value","dynamic"),E(3),nn("ngModel",r.collectionName),E(2),fe("",r.selectedMailType+" ","Send Mail"),E(4),sd(" currCount - ",r.currCount," - ",r.curEmail,`
 `),E(),$("ngIf",r.selectedMailType==="static"),E(),$("ngIf",r.selectedMailType==="dynamic"),E(),fe(" ",r.generatedMail==null?null:r.generatedMail.subject,`
